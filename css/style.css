@@ -97,10 +97,25 @@ p + p { margin-top: 0.9rem; }
   display: block;
 }
 .portrait-links {
-  display: flex; flex-wrap: wrap; gap: 6px 12px;
-  margin-top: 12px;
-  font-family: var(--font-sans); font-size: 0.85rem;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+  margin-top: 14px;
+  font-family: var(--font-sans); font-size: 0.84rem;
 }
+.portrait-links a {
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+  padding: 7px 10px;
+  color: var(--text-secondary);
+  background: var(--card-bg);
+  border: 1px solid var(--border); border-radius: 8px;
+  transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease, transform 0.15s ease;
+}
+.portrait-links a:hover {
+  color: #fff; background: var(--accent); border-color: var(--accent);
+  text-decoration: none; transform: translateY(-1px);
+}
+:root[data-theme="dark"] .portrait-links a:hover { color: var(--bg); }
+.portrait-links a:active { transform: translateY(0); }
+.portrait-links svg { flex: none; }
 .about-name { font-size: 2.1rem; line-height: 1.2; letter-spacing: -0.01em; }
 .about-title { color: var(--text-secondary); font-size: 1rem; margin: 6px 0 16px; }
 
