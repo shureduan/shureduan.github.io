@@ -1,33 +1,34 @@
 /* ===== Reset & tokens ===== */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
+/* Economist-style palette: signature red on white, with grey rules. */
 :root {
-  --accent: #9e1b32;
-  --accent-soft: rgba(158, 27, 50, 0.10);
-  --text: #1c1b1a;
-  --text-secondary: #55524e;
-  --text-light: #8a8681;
-  --bg: #fffdfb;
-  --bg-alt: #f6f3ef;
-  --border: #e3ded7;
+  --accent: #e3120b;
+  --accent-soft: rgba(227, 18, 11, 0.09);
+  --text: #121212;
+  --text-secondary: #4a4a4a;
+  --text-light: #8c8c8c;
+  --bg: #ffffff;
+  --bg-alt: #f2f2f2;
+  --border: #d9d9d9;
   --card-bg: #ffffff;
-  --nav-bg: rgba(255, 253, 251, 0.92);
+  --nav-bg: rgba(255, 255, 255, 0.94);
   --font-serif: 'Palatino', 'Palatino Linotype', 'Iowan Old Style', Georgia, 'Songti SC', serif;
   --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
   --maxw: 880px;
 }
 
 :root[data-theme="dark"] {
-  --accent: #e8788c;
-  --accent-soft: rgba(232, 120, 140, 0.14);
-  --text: #e6e2dd;
-  --text-secondary: #aaa49d;
-  --text-light: #7e7871;
-  --bg: #16161a;
-  --bg-alt: #1d1d22;
-  --border: #33323a;
-  --card-bg: #1d1d22;
-  --nav-bg: rgba(22, 22, 26, 0.92);
+  --accent: #ff4f45;
+  --accent-soft: rgba(255, 79, 69, 0.14);
+  --text: #e9e9e9;
+  --text-secondary: #a8a8a8;
+  --text-light: #7a7a7a;
+  --bg: #121212;
+  --bg-alt: #1b1b1b;
+  --border: #333333;
+  --card-bg: #1b1b1b;
+  --nav-bg: rgba(18, 18, 18, 0.94);
 }
 
 html { scroll-behavior: smooth; }
@@ -52,6 +53,7 @@ p + p { margin-top: 0.9rem; }
 /* ===== Navbar ===== */
 .navbar {
   position: sticky; top: 0; z-index: 50;
+  border-top: 3px solid var(--accent);
   background: var(--nav-bg);
   backdrop-filter: saturate(160%) blur(10px);
   border-bottom: 1px solid var(--border);
