@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jingxuan Duan - Carnegie Mellon University</title>
+  <meta name="description" content="Jingxuan Duan is an M.S. student in Civil and Environmental Engineering at Carnegie Mellon University, working on multimodal perception, robot learning, and autonomous systems for construction environments.">
+  <meta name="author" content="Jingxuan Duan">
+  <meta property="og:title" content="Jingxuan Duan - Carnegie Mellon University">
+  <meta property="og:description" content="M.S. student working on multimodal perception, robot learning, and autonomous systems for construction environments.">
+  <meta property="og:type" content="website">
+  <link rel="stylesheet" href="css/style.css">
+  <script>
+    (function () {
+      var theme = localStorage.getItem('theme') ||
+        (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="container nav-inner">
+      <a class="nav-brand" href="#top">Jingxuan Duan</a>
+      <div class="nav-right">
+        <div class="nav-links">
+          <a href="#about">About</a>
+          <a href="#research">Research</a>
+          <a href="#education">Education</a>
+          <a href="#experience">Experience</a>
+          <a href="#awards">Awards</a>
+          <a href="blog.html">Blog</a>
+        </div>
+        <button class="theme-toggle" aria-label="Toggle colour theme">
+          <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- About -->
+  <section id="about" class="section" style="scroll-margin-top:0">
+    <span id="top"></span>
+    <div class="container">
+      <div class="about-grid">
+        <div class="portrait-wrapper">
+          <img src="assets/portrait.jpg" alt="Jingxuan Duan" width="210" height="210">
+          <div class="portrait-links">
+            <a href="mailto:jingxuad@andrew.cmu.edu">Email</a>
+            <a href="https://github.com/shureduan">GitHub</a>
+            <a href="https://www.linkedin.com/in/jingxuan-duan/">LinkedIn</a>
+            <a href="assets/Jingxuan_Duan_CV.pdf">CV</a>
+          </div>
+        </div>
+        <div class="about-content">
+          <h1 class="about-name">Jingxuan Duan</h1>
+          <p class="about-title">M.S. in Civil and Environmental Engineering, Carnegie Mellon University</p>
+          <p>
+            I work on perception and decision-making for robots that operate in messy physical
+            environments: construction sites, industrial workstations, and roads. My projects so far
+            connect multimodal temporal segmentation, planning and optimisation for multi-floor
+            delivery, and representation learning for manipulation policies.
+          </p>
+          <p>
+            I am currently advised by <a href="https://www.cmu.edu/cee/people/faculty/tang.html">Prof. Pingbo Tang</a>
+            in the Department of Civil and Environmental Engineering, and I am applying to Ph.D.
+            programs for Fall 2027.
+          </p>
+
+          <h3 class="subhead">Research interests</h3>
+          <ul class="interest-list">
+            <li>Anchor mining for robot training and policy generation from task-specific increments</li>
+            <li>World-model-based robot training</li>
+            <li>Computer vision and multimodal fusion</li>
+            <li>Dataset augmentation and control for robots and autonomous driving on construction sites</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Research -->
+  <section id="research" class="section section-alt">
+    <div class="container">
+      <h2 class="section-title">Research</h2>
+
+      <article class="entry">
+        <div class="entry-head">
+          <h3><a href="https://github.com/shureduan/TGIF-Multimodal-Temporal-Segmentation">TGIF: Multimodal Temporal Segmentation</a></h3>
+          <span class="entry-date">Summer &ndash; Sep 2026</span>
+        </div>
+        <p class="entry-role">Summer Research, CEE, Carnegie Mellon University &middot; Advisor: Prof. Pingbo Tang</p>
+        <p>
+          Multimodal (video + vibration) temporal action segmentation, where Dynamic Window Attention
+          adapts the sensor window to the predicted action segment instead of a fixed length,
+          sharpening attention-based fusion and improving segmentation accuracy.
+        </p>
+        <ul class="entry-points">
+          <li>Dual-ROI VideoMAE features with MS-TCN segmentation raised activity recognition from about 80% to 91.9% validation accuracy.</li>
+          <li>DWA fusion reached 92.5% mean accuracy (93.7% best seed) and lifted the Edit score from 89.7% to 91.4%.</li>
+          <li>On WEAR, concatenated Macro-F1 improved from 75.73% to 81.09% over video-only, early-concatenation, and fixed-window baselines.</li>
+        </ul>
+        <p class="entry-links"><a href="https://github.com/shureduan/TGIF-Multimodal-Temporal-Segmentation">Code &amp; write-up &rarr;</a></p>
+      </article>
+
+      <article class="entry">
+        <div class="entry-head">
+          <h3><a href="https://github.com/shureduan/Autonomous_Delivery_Robot_System">Autonomous Delivery Robot System</a></h3>
+          <span class="entry-date">Jan &ndash; May 2026</span>
+        </div>
+        <p class="entry-role">Independent Study, CEE, Carnegie Mellon University &middot; Advisor: Prof. Pingbo Tang</p>
+        <p>
+          A Unity-based multi-floor construction-site delivery robot system, connecting semantic
+          topology, Theta* planning, capacity-constrained multi-trip scheduling, and Pure Pursuit
+          execution, with a separate SAC study of local recovery.
+        </p>
+        <ul class="entry-points">
+          <li>Multi-trip, multi-commodity routing model with trip-indexed routes, explicit unloading variables, and bounded trip counts that constrain the CBC search space.</li>
+          <li>Three-floor delivery across ramps and an elevator completed 100/100 randomised simulated deliveries at a mean round-trip time of 223 s.</li>
+          <li>PARS, a SAC-based local recovery policy, reached 93.7 &plusmn; 2.3% success in the final training interval.</li>
+        </ul>
+        <p class="entry-links">
+          <a href="https://github.com/shureduan/Autonomous_Delivery_Robot_System">Code &amp; write-up &rarr;</a>
+          <a href="https://github.com/shureduan/Autonomous_Delivery_Robot_System/blob/main/docs/Autonomous_Delivery_Robot_System.pdf">Manuscript (PDF) &rarr;</a>
+        </p>
+      </article>
+
+      <article class="entry">
+        <div class="entry-head">
+          <h3><a href="https://github.com/ailisilob/DELTA">Task-Aware Anchor-Delta Representations for Robot Learning</a> <span class="tag">ongoing</span></h3>
+          <span class="entry-date">Sep 2026 &ndash; present</span>
+        </div>
+        <p class="entry-role">Ongoing research in robot learning</p>
+        <p>
+          Task-aware anchor-delta representations for robot learning: sparse visual anchors plus
+          task-relevant state deltas in place of dense video. The question is whether manipulation
+          policies need continuous dense observation at all, or whether anchors and deltas preserve
+          the decision-relevant information at a fraction of the storage.
+        </p>
+      </article>
+
+      <article class="entry">
+        <div class="entry-head">
+          <h3>DMI Eye-Tracking: Manufacturing Skill Capture <span class="tag">ongoing</span></h3>
+          <span class="entry-date">Sep 2026 &ndash; present</span>
+        </div>
+        <p class="entry-role">Early-stage research, MFI Project, Carnegie Mellon University</p>
+        <p>
+          Studying how eye-tracking video, operator narration, and machine context can capture tacit
+          knowledge in roll-forming changeovers, focusing on quality-inspection decisions and
+          Observe&ndash;Orient&ndash;Decide&ndash;Act episodes for operator guidance.
+        </p>
+      </article>
+
+      <article class="entry">
+        <div class="entry-head">
+          <h3><a href="https://github.com/shureduan/F1tenth_team11_final_project">F1TENTH: Human Prior Knowledge Defense Route Generation</a></h3>
+          <span class="entry-date">Course project, 2026</span>
+        </div>
+        <p class="entry-role">Team project, Robotics Institute, Carnegie Mellon University</p>
+        <p>
+          Learns an offline per-segment defensive preference from track geometry and human racing
+          priors, then executes it online as an explicit blocking objective inside a constrained
+          NMPC controller.
+        </p>
+        <p class="entry-links"><a href="https://github.com/shureduan/F1tenth_team11_final_project">Code &amp; write-up &rarr;</a></p>
+      </article>
+    </div>
+  </section>
+
+  <!-- Education -->
+  <section id="education" class="section">
+    <div class="container">
+      <h2 class="section-title">Education</h2>
+
+      <div class="entry compact">
+        <div class="entry-head">
+          <h3>Carnegie Mellon University</h3>
+          <span class="entry-date">Aug 2025 &ndash; Dec 2026</span>
+        </div>
+        <p class="entry-role">M.S. in Civil and Environmental Engineering &middot; GPA 3.87/4.0</p>
+        <p class="entry-note">
+          Track: Sustainable Energy and Transportation Systems. Coursework includes Machine Learning
+          (10-601), Deep Reinforcement Learning (10-703), Computer Vision (16-720), Visual Learning
+          and Recognition (16-724), F1TENTH (16-664), Probabilistic Estimation Methods (12-704), and
+          Sensors, Data, and Models in Engineering Systems (12-778).
+        </p>
+      </div>
+
+      <div class="entry compact">
+        <div class="entry-head">
+          <h3>Southeast University</h3>
+          <span class="entry-date">Aug 2021 &ndash; Jun 2025</span>
+        </div>
+        <p class="entry-role">B.Eng. in Highway and Bridge Engineering &middot; GPA 85.6/100</p>
+      </div>
+
+      <div class="entry compact">
+        <div class="entry-head">
+          <h3>University of California, Los Angeles</h3>
+          <span class="entry-date">Aug &ndash; Sep 2023</span>
+        </div>
+        <p class="entry-role">Summer Session &middot; GPA 4.0/4.0</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience -->
+  <section id="experience" class="section section-alt">
+    <div class="container">
+      <h2 class="section-title">Industry Experience</h2>
+
+      <div class="entry compact">
+        <div class="entry-head">
+          <h3>ByteDance</h3>
+          <span class="entry-date">Jan 2022; Dec 2022 &ndash; Jan 2023; Oct 2024 &ndash; Jan 2025</span>
+        </div>
+        <p class="entry-role">Data Analyst Intern, Real Estate &amp; Corporate Information Systems &middot; Beijing / Shanghai</p>
+        <ul class="entry-points">
+          <li>Analysed global workspace utilisation and return-to-office trends at workstation, zone, and region level to support space planning.</li>
+          <li>Built an interactive dashboard of nationwide workstation changes and supported cross-regional reporting.</li>
+        </ul>
+      </div>
+
+      <div class="entry compact">
+        <div class="entry-head">
+          <h3>BYD, Automotive Engineering Research Institute</h3>
+          <span class="entry-date">Jan 2024</span>
+        </div>
+        <p class="entry-role">Intern &middot; Xi'an</p>
+        <ul class="entry-points">
+          <li>Built a vehicle simulation framework and powertrain modules in AVL CRUISE for the European-export Song PLUS, optimising economy and performance under NEDC, WLTP, and CLTC cycles.</li>
+          <li>Conducted midsize SUV competitor analysis for a product positioning manual.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Awards -->
+  <section id="awards" class="section">
+    <div class="container">
+      <h2 class="section-title">Selected Honors &amp; Awards</h2>
+      <ul class="award-list">
+        <li><span class="award-year">2025</span> Outstanding Graduate and Outstanding Graduation Thesis, Southeast University</li>
+        <li><span class="award-year">2025</span> Merit Student, Southeast University</li>
+        <li><span class="award-year">2025</span> National 1st Outstanding Winner, Mao Yisheng Public Bridge Design Competition</li>
+        <li><span class="award-year">2024</span> Gold Award, SEU &ldquo;Celebration Cup&rdquo; Innovation and Entrepreneurship Plan Competition</li>
+        <li><span class="award-year">2024</span> Honorable Mention, Mathematical Contest in Modeling</li>
+        <li><span class="award-year">2023, 2025</span> Zhishan Student Scholarship, Southeast University</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Blog preview -->
+  <section id="blog" class="section section-alt">
+    <div class="container">
+      <h2 class="section-title">Blog</h2>
+      <div class="blog-preview-list" id="blog-preview">
+        <p class="muted">Loading posts&hellip;</p>
+      </div>
+      <a href="blog.html" class="blog-view-all">View all posts &rarr;</a>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <p>
+        <a href="mailto:jingxuad@andrew.cmu.edu">jingxuad@andrew.cmu.edu</a> &middot;
+        <a href="mailto:shureduan0912@gmail.com">shureduan0912@gmail.com</a> &middot;
+        <a href="https://github.com/shureduan">GitHub</a> &middot;
+        <a href="https://www.linkedin.com/in/jingxuan-duan/">LinkedIn</a>
+      </p>
+      <p class="muted">&copy; 2026 Jingxuan Duan &middot; Carnegie Mellon University</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/home-blog.js"></script>
+</body>
+</html>

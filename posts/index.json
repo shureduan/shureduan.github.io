@@ -1,0 +1,16 @@
+[
+  {
+    "slug": "dynamic-window-attention",
+    "title": "Why a fixed sensor window is the wrong default",
+    "date": "Sep 2026",
+    "tag": "research",
+    "file": "posts/dynamic-window-attention.md"
+  },
+  {
+    "slug": "hello",
+    "title": "Starting this site",
+    "date": "Sep 2026",
+    "tag": "note",
+    "file": "posts/hello.md"
+  }
+]
