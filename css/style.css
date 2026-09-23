@@ -151,6 +151,8 @@ p + p { margin-top: 0.9rem; }
 .entry-head h3 a { color: var(--text); }
 .entry-head h3 a:hover { color: var(--accent); text-decoration: none; }
 .entry-logo { height: 15px; width: auto; vertical-align: -2px; margin-right: 8px; }
+/* Marks drawn in a single dark colour are flipped to white in dark mode. */
+:root[data-theme="dark"] .entry-logo.invertible { filter: brightness(0) invert(1); }
 .entry-date {
   font-family: var(--font-sans); font-size: 0.8rem; color: var(--text-light);
   white-space: nowrap;
