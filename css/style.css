@@ -92,7 +92,7 @@ p + p { margin-top: 0.9rem; }
 }
 
 /* ===== About ===== */
-.about-grid { display: grid; grid-template-columns: 210px 1fr; gap: 38px; align-items: start; }
+.about-grid { display: grid; grid-template-columns: 240px 1fr; gap: 38px; align-items: start; }
 .portrait-wrapper img {
   width: 100%; height: auto; border-radius: 10px;
   border: 1px solid var(--border);
@@ -107,14 +107,13 @@ p + p { margin-top: 0.9rem; }
 .portrait-email a:hover { color: var(--accent); }
 
 .portrait-links {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 7px;
   margin-top: 10px;
-  font-family: var(--font-sans); font-size: 0.84rem;
+  font-family: var(--font-sans); font-size: 0.78rem;
 }
-.portrait-links a:last-child { grid-column: 1 / -1; }
 .portrait-links a {
   display: flex; align-items: center; justify-content: center; gap: 6px;
-  padding: 7px 10px;
+  padding: 7px 6px;
   color: var(--text-secondary);
   background: var(--card-bg);
   border: 1px solid var(--border); border-radius: 8px;
@@ -126,7 +125,7 @@ p + p { margin-top: 0.9rem; }
 }
 :root[data-theme="dark"] .portrait-links a:hover { color: var(--bg); }
 .portrait-links a:active { transform: translateY(0); }
-.portrait-links svg { flex: none; }
+.portrait-links svg { flex: none; width: 13px; height: 13px; }
 .about-name { font-size: 2.1rem; line-height: 1.2; letter-spacing: -0.01em; }
 .about-title { color: var(--text-secondary); font-size: 1rem; margin: 6px 0 16px; }
 
