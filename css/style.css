@@ -150,6 +150,7 @@ p + p { margin-top: 0.9rem; }
 .entry-head h3 { font-size: 1.12rem; font-weight: 700; line-height: 1.35; }
 .entry-head h3 a { color: var(--text); }
 .entry-head h3 a:hover { color: var(--accent); text-decoration: none; }
+.entry-logo { height: 15px; width: auto; vertical-align: -2px; margin-right: 8px; }
 .entry-date {
   font-family: var(--font-sans); font-size: 0.8rem; color: var(--text-light);
   white-space: nowrap;
