@@ -165,6 +165,34 @@ p + p { margin-top: 0.9rem; }
 .entry-points li::before { content: '\2013'; position: absolute; left: 0; color: var(--accent); }
 .entry-links { margin-top: 10px; display: flex; gap: 18px; flex-wrap: wrap; font-family: var(--font-sans); font-size: 0.85rem; }
 
+.entry-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; font-family: var(--font-sans); font-size: 0.84rem; }
+.entry-actions a {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 6px 12px;
+  color: var(--text-secondary); background: var(--card-bg);
+  border: 1px solid var(--border); border-radius: 8px;
+  transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease, transform 0.15s ease;
+}
+.entry-actions a:hover {
+  color: #fff; background: var(--accent); border-color: var(--accent);
+  text-decoration: none; transform: translateY(-1px);
+}
+:root[data-theme="dark"] .entry-actions a:hover { color: var(--bg); }
+.entry-actions a:active { transform: translateY(0); }
+.entry-actions svg { flex: none; }
+
+.entry-figure { margin-top: 16px; }
+.entry-figure img, .entry-figure video {
+  display: block; width: 100%; height: auto;
+  background: var(--card-bg);
+  border: 1px solid var(--border); border-radius: 6px;
+}
+.entry-figure figcaption {
+  margin-top: 7px;
+  font-family: var(--font-sans); font-size: 0.79rem; line-height: 1.5;
+  color: var(--text-light);
+}
+
 .tag {
   display: inline-block; vertical-align: middle;
   font-family: var(--font-sans); font-size: 0.68rem; font-weight: 600;
