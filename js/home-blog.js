@@ -8,7 +8,11 @@ document.addEventListener('DOMContentLoaded', function () {
     .then(function (posts) {
       if (!posts.length) { box.innerHTML = '<p class="muted">No posts yet.</p>'; return; }
       box.innerHTML = posts.slice(0, 3).map(function (p) {
-        return '<a class="blog-preview-item" href="blog.html#' + p.slug + '">' +
+        // A post with a "url" lives elsewhere and opens in a new tab.
+        var attrs = p.url
+          ? 'href="' + p.url + '" target="_blank" rel="noopener"'
+          : 'href="blog.html#' + p.slug + '"';
+        return '<a class="blog-preview-item" ' + attrs + '>' +
           '<span class="blog-preview-date">' + p.date + '</span>' +
           '<span class="blog-preview-title">' + p.title + '</span>' +
           '<span class="blog-preview-tag">' + (p.tag || 'note') + '</span>' +

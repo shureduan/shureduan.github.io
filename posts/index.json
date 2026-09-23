@@ -1,5 +1,12 @@
 [
   {
+    "slug": "sql-notes",
+    "title": "SQL study notes",
+    "date": "Sep 2026",
+    "tag": "notes",
+    "url": "https://www.yuque.com/shizigege-swffx/dmymsc"
+  },
+  {
     "slug": "dynamic-window-attention",
     "title": "Why a fixed sensor window is the wrong default",
     "date": "Sep 2026",

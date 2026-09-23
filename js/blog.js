@@ -13,7 +13,11 @@ document.addEventListener('DOMContentLoaded', function () {
     if (subtitle) subtitle.style.display = '';
     if (!posts.length) { listInner.innerHTML = '<p class="muted">No posts yet.</p>'; return; }
     listInner.innerHTML = posts.map(function (p) {
-      return '<a class="blog-preview-item" href="#' + p.slug + '">' +
+      // A post with a "url" lives elsewhere and opens in a new tab.
+      var attrs = p.url
+        ? 'href="' + p.url + '" target="_blank" rel="noopener"'
+        : 'href="#' + p.slug + '"';
+      return '<a class="blog-preview-item" ' + attrs + '>' +
         '<span class="blog-preview-date">' + p.date + '</span>' +
         '<span class="blog-preview-title">' + p.title + '</span>' +
         '<span class="blog-preview-tag">' + (p.tag || 'note') + '</span>' +
@@ -52,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function route() {
     var slug = window.location.hash.replace(/^#/, '');
-    var post = posts.filter(function (p) { return p.slug === slug; })[0];
+    var post = posts.filter(function (p) { return p.slug === slug && p.file; })[0];
     if (post) { renderPost(post); } else { renderList(); }
   }
 
