@@ -7,8 +7,12 @@ GitHub Pages — no build step, no framework, no dependencies to install.
 
 | Path | What it holds |
 |---|---|
-| `index.html` | The whole home page: about, research, education, experience, awards, blog preview |
+| `index.html` | The whole home page: about, research, education, experience, awards, and the photo strips |
+| `css/style.css` | All styling. Colours are CSS variables at the top; dark mode redefines them under `[data-theme="dark"]` |
+| `js/main.js` | Theme toggle and the mobile navigation menu |
 | `assets/` | Portrait and CV PDF |
+| `assets/research/` | Research figures and the F1TENTH clip |
+| `assets/life/` | Football and choir photos for the scrolling strips |
 
 ## Photo strips
 
