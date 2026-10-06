@@ -13,6 +13,7 @@ GitHub Pages — no build step, no framework, no dependencies to install.
 | `assets/` | Portrait and CV PDF |
 | `assets/research/` | Research figures and the F1TENTH clip |
 | `assets/life/` | Football and choir photos for the scrolling strips |
+| `assets/papers/` | PDF of the 2023 journal paper linked from the awards list |
 
 ## Photo strips
 
