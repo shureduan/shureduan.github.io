@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DWA: Signal-Adaptive Multimodal Activity Understanding | Jingxuan Duan</title>
-  <meta name="description" content="Dynamic Window Attention combines video with vibration and wearable sensor signals to recognize human activities over time. Scenarios, temporal segmentation results, and a short method overview.">
+  <title>Dynamic Window Attention (DWA) | Jingxuan Duan</title>
+  <meta name="description" content="Video–sensor temporal action segmentation with signal-adaptive attention windows. TGIF and WEAR datasets, matched baseline comparisons, and method.">
   <meta name="author" content="Jingxuan Duan">
-  <meta property="og:title" content="DWA: Signal-Adaptive Multimodal Activity Understanding">
-  <meta property="og:description" content="From sewing workstations to outdoor exercise: using signal shape to select the sensor context for video-based activity understanding.">
+  <meta property="og:title" content="Dynamic Window Attention (DWA)">
+  <meta property="og:description" content="Video–sensor temporal action segmentation: datasets, results, and method.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://shureduan.github.io/research/dwa/">
   <meta property="og:image" content="https://shureduan.github.io/assets/research/dwa/tgif-sewing.jpg">
@@ -15,132 +15,108 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <a class="skip-link" href="#scenarios">Skip to research</a>
-  <nav class="page-nav" aria-label="Project navigation">
-    <a class="home-link" href="../../">Jingxuan Duan <span aria-hidden="true">↗</span></a>
-    <div><a href="#scenarios">Scenarios</a><a href="#results">Results</a><a href="#method">Method</a></div>
-  </nav>
+  <a class="skip-link" href="#scenarios">Skip to datasets</a>
   <main>
-    <header class="hero wrap">
-      <p class="eyebrow">Video + physical signals · Temporal action segmentation</p>
-      <h1><span class="title-accent">Dynamic Window Attention</span><br>for Multimodal Activity Understanding</h1>
-      <p class="hero-question">What is a person doing, and when does the activity change?</p>
-      <p class="hero-summary">We combine video with vibration or wearable motion signals to recognize activities over time. DWA adapts the sensor attention window to local signal structure, helping the model use the relevant physical context around each action.</p>
-      <p class="authors"><a href="../../">Jingxuan Duan</a><span>Carnegie Mellon University</span></p>
-      <p class="advisor">Research advised by <a href="https://www.cmu.edu/cee/people/faculty/tang.html">Prof. Pingbo Tang</a> · Civil and Environmental Engineering</p>
-      <div class="resource-links">
-        <a class="button button-primary" href="https://github.com/shureduan/TGIF-Multimodal-Temporal-Segmentation">Code <span aria-hidden="true">↗</span></a>
-        <a class="button" href="https://github.com/shureduan/TGIF-Multimodal-Temporal-Segmentation/releases/tag/wear-shape-v4-20261020">Pretrained weights</a>
-        <a class="button" href="#results">View results <span aria-hidden="true">↓</span></a>
-      </div>
+    <header>
+      <h1>Dynamic Window Attention (DWA)</h1>
+      <p class="byline"><a href="../../">Jingxuan Duan</a> · Carnegie Mellon University<br>Advisor: <a href="https://www.cmu.edu/cee/people/faculty/tang.html">Prof. Pingbo Tang</a></p>
+      <p>DWA combines video with physical sensor signals for temporal action segmentation. It resizes the sensor attention window according to local signal shape.</p>
+      <p class="links"><a href="https://github.com/shureduan/TGIF-Multimodal-Temporal-Segmentation">Code</a> · <a href="https://github.com/shureduan/TGIF-Multimodal-Temporal-Segmentation/releases/tag/wear-shape-v4-20261020">Pretrained weights</a> · <a href="https://github.com/shureduan/TGIF-Multimodal-Temporal-Segmentation/blob/main/docs/envelope_shape_pilot.md">Reproduction guide</a></p>
     </header>
 
-    <section id="scenarios" class="wrap section">
-      <div class="section-heading"><p class="eyebrow">01 / The setting</p><h2>Watch the action. Listen to the physical signal.</h2></div>
-      <p class="section-intro">Similar-looking motions can correspond to different activities. A sewing machine’s vibration or a wearable accelerometer adds another view of what is happening—but the useful signal interval changes from action to action.</p>
-      <article class="scenario">
-        <div class="scenario-heading"><div><p class="dataset-label">TGIF · Industrial work</p><h3>Worker states at a sewing workstation</h3></div><span class="modality">Video + machine vibration</span></div>
+    <section id="scenarios">
+      <h2>Datasets</h2>
+      <article>
+        <h3>TGIF: worker-state recognition</h3>
+        <p>Video + machine vibration. Three states: idle, sewing and handling.</p>
         <figure>
           <div class="state-frames">
-            <div><img src="../../assets/research/dwa/tgif-idle.jpg" alt="TGIF worker sitting at the sewing workstation during an idle interval" width="1280" height="720"><p><span class="state-dot idle"></span>Idle</p></div>
-            <div><img src="../../assets/research/dwa/tgif-sewing.jpg" alt="TGIF worker operating the sewing machine" width="1280" height="720"><p><span class="state-dot sewing"></span>Sewing</p></div>
-            <div><img src="../../assets/research/dwa/tgif-handling.jpg" alt="TGIF worker handling fabric at the workstation" width="1280" height="720"><p><span class="state-dot handling"></span>Handling</p></div>
+            <div><img src="../../assets/research/dwa/tgif-idle.jpg" alt="TGIF worker during an idle interval" width="1280" height="720"><p>Idle</p></div>
+            <div><img src="../../assets/research/dwa/tgif-sewing.jpg" alt="TGIF worker operating the sewing machine" width="1280" height="720"><p>Sewing</p></div>
+            <div><img src="../../assets/research/dwa/tgif-handling.jpg" alt="TGIF worker handling fabric" width="1280" height="720"><p>Handling</p></div>
           </div>
-          <img class="signal-image" src="../../assets/research/dwa/tgif_vibration_smoothing.png" alt="TGIF vibration RMS traces at stations 2 and 3 with annotated sewing and handling intervals" width="2084" height="841" loading="lazy">
-          <figcaption><strong>Physical evidence for work states.</strong> Machine vibration complements the worker’s visible motion. The photos illustrate the three classes; the signal plots show separate annotated excerpts, rather than the exact times of the three photos. Original TGIF images and signal plots are retained.</figcaption>
+          <img src="../../assets/research/dwa/tgif_vibration_smoothing.png" alt="TGIF vibration RMS traces with annotated sewing and handling intervals" width="2084" height="841" loading="lazy">
+          <figcaption>Frames illustrate the action classes; vibration plots show separate annotated excerpts.</figcaption>
         </figure>
       </article>
-      <article class="scenario">
-        <div class="scenario-heading"><div><p class="dataset-label">WEAR · Outdoor exercise</p><h3>Activities captured from the head, wrists and ankles</h3></div><span class="modality">Egocentric video + accelerometers</span></div>
+      <article>
+        <h3>WEAR: outdoor activity recognition</h3>
+        <p>Egocentric video + four 50 Hz, 3-axis accelerometers. Eighteen exercise classes plus background.</p>
         <figure>
-          <a class="image-link" href="../../assets/research/dwa/wear-capture-setup.png" target="_blank" rel="noopener" aria-label="Open the official WEAR capture and signal figure at full size">
-            <img src="../../assets/research/dwa/wear-capture-setup.png" alt="Official WEAR figure: egocentric images of 18 exercises, synchronized accelerometer traces, and a person wearing a head camera with sensors at both wrists and ankles" width="1295" height="560" loading="lazy">
-          </a>
-          <figcaption><strong>A second setting for video–sensor fusion.</strong> WEAR records outdoor activities with a head-mounted camera and four 3-axis accelerometers. These are body-motion signals, sampled at 50 Hz. Capture figure: Bock et al., <a href="https://mariusbock.github.io/wear/">WEAR (2024)</a>, reproduced without modification under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.</figcaption>
+          <a href="../../assets/research/dwa/wear-capture-setup.png" target="_blank" rel="noopener" aria-label="Open WEAR capture figure at full size"><img src="../../assets/research/dwa/wear-capture-setup.png" alt="Official WEAR exercise images, accelerometer traces, head camera and wrist/ankle sensor setup" width="1295" height="560" loading="lazy"></a>
+          <figcaption>Capture figure: Bock et al., <a href="https://mariusbock.github.io/wear/">WEAR (2024)</a>. Unmodified; <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.</figcaption>
         </figure>
       </article>
     </section>
 
-    <section id="results" class="section results-section">
-      <div class="wrap">
-        <div class="section-heading"><p class="eyebrow">02 / What the model predicts</p><h2>An activity label at every time step.</h2></div>
-        <p class="section-intro">The output is a timeline of actions, including their transitions. Below, colors identify activities and each row compares predictions with the ground truth.</p>
-        <nav class="dataset-links" aria-label="Jump to dataset results"><a href="#tgif-results">TGIF results ↓</a><a href="#wear-results">WEAR results ↓</a></nav>
-        <article id="tgif-results" class="result-block">
-          <div class="result-heading"><div><p class="dataset-label">TGIF · Reported validation results</p><h3>Video and vibration for worker-state recognition</h3></div><div class="result-number"><strong>92.5<span>%</span></strong><span>Accuracy · video + vibration</span></div></div>
-          <figure>
-            <a class="image-link" href="../../assets/research/dwa/tgif_timeline_seed43.png" target="_blank" rel="noopener" aria-label="Open TGIF temporal classification results at full size"><img src="../../assets/research/dwa/tgif_timeline_seed43.png" alt="Original TGIF seed-43 timelines compare ground truth, video-only predictions and multimodal predictions for idle, sewing and handling" width="2247" height="633" loading="lazy"></a>
-            <figcaption>Original TGIF seed-43 example from the source’s “good-vibration validation subset.” The reported TGIF validation results are separate from the latest WEAR evaluation.</figcaption>
-          </figure>
-          <div class="table-scroll"><table class="metrics-table tgif-table">
-            <caption class="sr-only">TGIF reported validation performance, percent</caption>
-            <thead><tr><th scope="col">Method</th><th scope="col">Accuracy ↑</th><th scope="col">Macro-F1 ↑</th><th scope="col">Edit score ↑</th></tr></thead>
-            <tbody>
-              <tr><th scope="row">Video-only</th><td>91.9</td><td>92.3</td><td>89.7</td></tr>
-              <tr class="highlight"><th scope="row">Video + vibration</th><td><strong>92.5</strong></td><td><strong>92.7</strong></td><td><strong>91.4</strong></td></tr>
-            </tbody>
-          </table></div>
-          <p class="table-note">Values in %. Changes over video-only: +0.6 percentage points in accuracy and +1.7 in Edit score. <a href="../../assets/research/dwa/data/tgif_confirmed_metrics.csv">Source values</a>.</p>
-        </article>
-        <article id="wear-results" class="result-block">
-          <div class="result-heading"><div><p class="dataset-label">WEAR · 18-subject LOSO · Seed 47</p><h3>Signal-adaptive windows for unseen people</h3></div><div class="result-number"><strong>79.94<span>%</span></strong><span>Mean subject accuracy · Shape DWA</span></div></div>
-          <p class="matched-protocol"><strong>A matched baseline comparison.</strong> All six methods are evaluated in our pipeline on the same 18 LOSO splits, seed 47, 2 Hz timeline and 19-class metric definitions. These are our reproduced baselines, rather than scores taken from the original WEAR paper.</p>
-          <figure>
-            <a class="image-link" href="../../assets/research/dwa/wear-timeline.svg" target="_blank" rel="noopener" aria-label="Open WEAR temporal classification results at full size"><img src="../../assets/research/dwa/wear-timeline.svg" alt="Full WEAR subject sbj_1 timeline showing ground truth, video-only predictions and envelope-shape DWA predictions across all 19 classes" width="1300" height="430" loading="lazy"></a>
-            <figcaption>Full sequence from held-out subject <code>sbj_1</code>, with the same subject, seed and class colors as the released comparison. The model recognizes 18 exercise classes plus background. <a href="../../assets/research/dwa/data/timeline_sbj_1.csv">Timeline data</a> · Open the figure for a larger view.</figcaption>
-          </figure>
-          <div class="table-scroll"><table class="metrics-table wear-table">
-            <caption class="sr-only">WEAR main comparison: 18 subjects, seed 47; all metrics in percent</caption>
-            <thead><tr><th scope="col">Method</th><th scope="col">Accuracy ↑</th><th scope="col"><span class="desktop-label">Subject </span>Macro-F1 ↑</th><th scope="col">mAP@0.5 ↑</th></tr></thead>
-            <tbody>
-              <tr><th scope="row">Video-only MS-TCN</th><td>74.20</td><td>63.05</td><td>59.96</td></tr>
-              <tr><th scope="row">Early concatenation</th><td>77.24</td><td>70.85</td><td>69.22</td></tr>
-              <tr><th scope="row">Fixed-window attention</th><td>78.60</td><td>72.33</td><td>67.50</td></tr>
-              <tr><th scope="row">Segment-guided attention (SWA)</th><td>79.18</td><td>73.96</td><td>71.12</td></tr>
-              <tr><th scope="row">Sensor-driven DWA (v3)</th><td>79.84</td><td>74.05</td><td>69.89</td></tr>
-              <tr class="highlight"><th scope="row">Envelope-shape DWA (v4) <span class="ours">ours</span></th><td><strong>79.94</strong></td><td><strong>75.14</strong></td><td><strong>71.44</strong></td></tr>
-            </tbody>
-          </table></div>
-          <p class="table-note">All values in %, averaged equally over the same 18 held-out subjects, with one seed (47). Each test person is excluded from training and checkpoint selection. LOSO means leave one subject out. <a href="../../assets/research/dwa/data/aggregate_metrics.csv">Complete source table, including subject SDs</a> · <a href="https://github.com/shureduan/TGIF-Multimodal-Temporal-Segmentation/blob/main/docs/envelope_shape_pilot.md">Evaluation protocol</a>.</p>
-          <div class="gain-summary" aria-label="Absolute gains of envelope-shape DWA over matched baselines">
-            <div class="gain-row"><h4>Over video-only<span>Benefit of the complete multimodal model</span></h4><p><strong>+5.74 <small>pp</small></strong><span>Accuracy</span></p><p><strong>+12.09 <small>pp</small></strong><span>Subject Macro-F1</span></p><p><strong>+11.48 <small>pp</small></strong><span>mAP@0.5</span></p></div>
-            <div class="gain-row"><h4>Over fixed-window attention<span>Comparison with a fixed sensor context</span></h4><p><strong>+1.33 <small>pp</small></strong><span>Accuracy</span></p><p><strong>+2.81 <small>pp</small></strong><span>Subject Macro-F1</span></p><p><strong>+3.93 <small>pp</small></strong><span>mAP@0.5</span></p></div>
-          </div>
-          <p class="table-note">Gains are absolute percentage-point differences (pp), computed from the unrounded source scores.</p>
-          <p class="finding"><strong>Shape DWA has the highest mean scores in this six-method comparison</strong> on accuracy, subject Macro-F1 and mAP@0.5.</p>
-        </article>
-      </div>
-    </section>
-
-    <section id="method" class="wrap section">
-      <div class="section-heading"><p class="eyebrow">03 / The idea</p><h2>Let the signal determine how far to attend.</h2></div>
-      <p class="section-intro">A fixed window may include an unrelated quiet interval or miss part of a longer action. Our latest WEAR implementation describes the signal’s coarse shape, resizes the window, and uses video to attend to the selected sensor interval.</p>
-      <ol class="method-steps">
-        <li><span class="step-index">1</span><h3>Describe the signal</h3><p>AC-RMS envelopes capture local activity strength. Ordered slope histograms describe whether the signal is rising, flat or falling, while preserving its rough temporal shape.</p></li>
-        <li><span class="step-index">2</span><h3>Resize the window</h3><p>Starting from a local interval or a predicted action segment, DWA keeps a contiguous region with similar signal structure. It contracts at changes and expands through similar neighbors.</p></li>
-        <li><span class="step-index">3</span><h3>Attend and refine</h3><p>Video queries attend to raw sensor keys and values within that window. A shared MS-TCN refines the action timeline over two rounds, followed by background calibration.</p></li>
-      </ol>
-      <div class="method-takeaway"><strong>Signal shape selects the context; raw sensor features provide the evidence.</strong><p>The descriptor controls window length. The fusion direction remains video → sensor, so the temporal support can change without replacing the sensor information used by attention.</p></div>
-      <div class="extra-result">
-        <div class="result-heading"><div><p class="dataset-label">A closer look · New vs previous DWA</p><h3>Higher recognition scores with less CPU time</h3></div><div class="speed-number"><strong>1.67×</strong><span>measured CPU speedup</span></div></div>
+    <section id="results">
+      <h2>Results</h2>
+      <article id="tgif-results">
+        <h3>TGIF — reported validation results</h3>
+        <p><strong>Video + vibration reaches 92.5% accuracy, up 0.6 percentage points over video-only.</strong></p>
         <figure>
-          <img src="../../assets/research/dwa/wear-quality-speed.svg" alt="Shape DWA raises subject Macro-F1 from 74.05 to 75.14 percent and lowers average CPU forward time from 1.266 to 0.757 seconds per sequence" width="1150" height="360" loading="lazy">
-          <figcaption>Recognition: all 18 LOSO subjects, seed 47. Timing: complete two-round model plus probe, one CPU thread, three sequences (<code>sbj_0</code>, <code>sbj_9</code>, <code>sbj_17</code>), one warm-up and five repeats per sequence. Mean forward time falls by 40.2%; data loading, normalization and video feature extraction are excluded. <a href="../../assets/research/dwa/data/inference_timing.csv">Timing measurements</a>.</figcaption>
+          <a href="../../assets/research/dwa/tgif_timeline_seed43.png" target="_blank" rel="noopener" aria-label="Open TGIF segmentation timeline at full size"><img src="../../assets/research/dwa/tgif_timeline_seed43.png" alt="TGIF timelines: ground truth, video-only and multimodal predictions for idle, sewing and handling" width="2247" height="633" loading="lazy"></a>
+          <figcaption>Original seed-43 example, labeled “good-vibration validation subset” in the source. TGIF results are separate from the WEAR v4 evaluation.</figcaption>
         </figure>
-      </div>
-    </section>
-    <section class="resources-section section">
-      <div class="wrap resources-grid">
-        <div><p class="eyebrow">Explore further</p><h2>From the overview to the experiment.</h2><p>The repository contains the implementation, full comparisons, component studies and instructions for evaluating the released WEAR checkpoints.</p></div>
-        <ul class="resource-list">
-          <li><a href="https://github.com/shureduan/TGIF-Multimodal-Temporal-Segmentation">Implementation &amp; full results <span aria-hidden="true">↗</span></a></li>
-          <li><a href="https://github.com/shureduan/TGIF-Multimodal-Temporal-Segmentation/blob/main/docs/envelope_shape_pilot.md">WEAR reproduction guide <span aria-hidden="true">↗</span></a></li>
-          <li><a href="https://github.com/shureduan/TGIF-Multimodal-Temporal-Segmentation/releases/tag/wear-shape-v4-20261020">18 parent/probe checkpoint pairs <span aria-hidden="true">↗</span></a></li>
-          <li><a href="https://mariusbock.github.io/wear/">Official WEAR dataset <span aria-hidden="true">↗</span></a></li>
+        <div class="table-scroll"><table class="metrics-table tgif-table">
+          <caption class="sr-only">TGIF reported validation scores, percent</caption>
+          <thead><tr><th scope="col">Method</th><th scope="col">Accuracy</th><th scope="col">Macro-F1</th><th scope="col">Edit score</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Video-only</th><td>91.9</td><td>92.3</td><td>89.7</td></tr>
+            <tr class="final-row"><th scope="row">Video + vibration</th><td>92.5</td><td>92.7</td><td>91.4</td></tr>
+          </tbody>
+        </table></div>
+        <p class="note">Scores in %. <a href="../../assets/research/dwa/data/tgif_confirmed_metrics.csv">Source table</a>.</p>
+      </article>
+
+      <article id="wear-results">
+        <h3>WEAR — matched baseline comparison</h3>
+        <p>All six methods use the same 18-subject LOSO splits, seed 47, 2 Hz evaluation grid and 19-class metrics. Baselines are reproduced in our pipeline.</p>
+        <figure>
+          <a href="../../assets/research/dwa/wear-timeline.svg" target="_blank" rel="noopener" aria-label="Open WEAR segmentation timeline at full size"><img src="../../assets/research/dwa/wear-timeline.svg" alt="WEAR sbj_1 full timeline: ground truth, video-only and envelope-shape DWA predictions" width="1300" height="430" loading="lazy"></a>
+          <figcaption>Full sequence from held-out subject <code>sbj_1</code>, seed 47. <a href="../../assets/research/dwa/data/timeline_sbj_1.csv">Timeline data</a>. Click figures to enlarge.</figcaption>
+        </figure>
+        <div class="table-scroll"><table class="metrics-table wear-table">
+          <caption class="sr-only">WEAR: equal subject means, percent; 18 subjects, seed 47</caption>
+          <thead><tr><th scope="col">Method</th><th scope="col">Accuracy</th><th scope="col"><span class="desktop-label">Subject </span>Macro-F1</th><th scope="col">mAP@0.5</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Video-only MS-TCN</th><td>74.20</td><td>63.05</td><td>59.96</td></tr>
+            <tr><th scope="row">Early concatenation</th><td>77.24</td><td>70.85</td><td>69.22</td></tr>
+            <tr><th scope="row">Fixed-window attention</th><td>78.60</td><td>72.33</td><td>67.50</td></tr>
+            <tr><th scope="row">Segment-guided attention (SWA)</th><td>79.18</td><td>73.96</td><td>71.12</td></tr>
+            <tr><th scope="row">Sensor-driven DWA (v3)</th><td>79.84</td><td>74.05</td><td>69.89</td></tr>
+            <tr class="final-row"><th scope="row">Envelope-shape DWA (v4)</th><td>79.94</td><td>75.14</td><td>71.44</td></tr>
+          </tbody>
+        </table></div>
+        <p class="note">Equal subject means (%), one seed. Test subjects are excluded from training and checkpoint selection. <a href="../../assets/research/dwa/data/aggregate_metrics.csv">Full table with subject SDs</a>.</p>
+        <p><strong>DWA has the highest mean accuracy, Macro-F1 and mAP@0.5 among these six methods.</strong></p>
+        <ul class="comparisons">
+          <li>Over video-only: <strong>+5.74 pp accuracy, +12.09 pp Macro-F1, +11.48 pp mAP@0.5.</strong></li>
+          <li>Over fixed-window attention: <strong>+1.33 pp accuracy, +2.81 pp Macro-F1, +3.93 pp mAP@0.5.</strong></li>
         </ul>
-      </div>
+        <p class="note">pp = absolute percentage points, computed before rounding.</p>
+      </article>
+
+      <article>
+        <h3>WEAR — inference time</h3>
+        <figure>
+          <a href="../../assets/research/dwa/wear-quality-speed.svg" target="_blank" rel="noopener" aria-label="Open WEAR quality and inference time comparison at full size"><img src="../../assets/research/dwa/wear-quality-speed.svg" alt="DWA v4 versus v3: Macro-F1 75.14 versus 74.05 percent; CPU forward time 0.757 versus 1.266 seconds" width="1150" height="360" loading="lazy"></a>
+          <figcaption>Macro-F1: 18 subjects, seed 47. Timing: complete model, one CPU thread, three sequences, five repeats after one warm-up. Loading, normalization and feature extraction excluded. <a href="../../assets/research/dwa/data/inference_timing.csv">Measurements</a>.</figcaption>
+        </figure>
+        <p>Mean CPU forward time decreases from 1.266 s to 0.757 s: <strong>40.2% less time (1.67× speedup)</strong> over DWA v3 in this measurement.</p>
+      </article>
+    </section>
+
+    <section id="method">
+      <h2>Method</h2>
+      <p>The latest WEAR implementation uses three steps:</p>
+      <ol>
+        <li><strong>Signal features:</strong> AC-RMS envelopes and ordered slope histograms describe activity strength and coarse signal shape.</li>
+        <li><strong>Window resizing:</strong> contract at signal changes; expand through contiguous regions with similar shape.</li>
+        <li><strong>One-way attention:</strong> video queries attend to raw sensor keys/values in the selected window. A shared MS-TCN refines predictions over two rounds, followed by background calibration.</li>
+      </ol>
     </section>
   </main>
-  <footer class="wrap footer"><p><a href="../../">Jingxuan Duan</a> · Carnegie Mellon University</p><p>Research overview · October 2026 · <a href="../../assets/research/dwa/ATTRIBUTION.md">Figure sources</a></p></footer>
+  <footer><a href="../../">Homepage</a> · <a href="../../assets/research/dwa/ATTRIBUTION.md">Figure sources</a></footer>
 </body>
 </html>
