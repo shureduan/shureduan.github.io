@@ -135,6 +135,13 @@ p + p { margin-top: 0.9rem; }
   color: var(--text-light);
   margin: 22px 0 8px;
 }
+.interest-heading {
+  display: flex; align-items: baseline; flex-wrap: wrap; gap: 8px 16px;
+}
+.interest-heading a {
+  font-size: 1rem; letter-spacing: normal; text-transform: none;
+  text-decoration: underline; text-underline-offset: 3px;
+}
 .interest-list { list-style: none; }
 .interest-list li { position: relative; padding-left: 16px; color: var(--text-secondary); }
 .interest-list li::before {
